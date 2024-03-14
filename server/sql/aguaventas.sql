@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-03-2024 a las 14:58:05
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Tiempo de generación: 14-03-2024 a las 23:41:40
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,10 +61,10 @@ CREATE TABLE `compras_productos` (
 
 CREATE TABLE `productos_aguacates` (
   `id_agacates` int(11) NOT NULL,
-  `nombre_aguacate` int(11) NOT NULL,
-  `tipo_aguacate` int(11) NOT NULL,
-  `precio_aguacate` int(11) NOT NULL,
-  `img_aguacate` int(11) NOT NULL,
+  `nombre_aguacate` varchar(50) NOT NULL,
+  `tipo_aguacate` varchar(50) NOT NULL,
+  `precio_aguacate` varchar(50) NOT NULL,
+  `img_aguacate` varchar(50) NOT NULL,
   `cantidad_prodcuctos` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -76,10 +76,10 @@ CREATE TABLE `productos_aguacates` (
 
 CREATE TABLE `productos_comerciales` (
   `id_productos` int(11) NOT NULL,
-  `nombre_producto` int(11) NOT NULL,
-  `tipo_producto` int(11) NOT NULL,
-  `precio_proucto` int(11) NOT NULL,
-  `img_producto` int(11) NOT NULL,
+  `nombre_producto` varchar(50) NOT NULL,
+  `tipo_producto` varchar(50) NOT NULL,
+  `precio_proucto` varchar(50) NOT NULL,
+  `img_producto` varchar(50) NOT NULL,
   `cantidad_prodcuctos` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -95,7 +95,7 @@ CREATE TABLE `usuarios` (
   `nombre_propietario` varchar(50) NOT NULL,
   `cedula` int(11) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `numero_nit` int(11) NOT NULL
+  `numero_nit` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -123,6 +123,12 @@ ALTER TABLE `productos_aguacates`
   ADD PRIMARY KEY (`id_agacates`);
 
 --
+-- Indices de la tabla `productos_comerciales`
+--
+ALTER TABLE `productos_comerciales`
+  ADD PRIMARY KEY (`id_productos`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -148,13 +154,19 @@ ALTER TABLE `compras_productos`
 -- AUTO_INCREMENT de la tabla `productos_aguacates`
 --
 ALTER TABLE `productos_aguacates`
-  MODIFY `id_agacates` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_agacates` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `productos_comerciales`
+--
+ALTER TABLE `productos_comerciales`
+  MODIFY `id_productos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuairo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuairo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
