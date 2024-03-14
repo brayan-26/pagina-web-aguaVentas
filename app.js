@@ -1,6 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import router from "./router/router.js";
+import { connection } from "./config/db.js";
 
 const app = express();
 
@@ -12,11 +13,17 @@ app.listen(3000, () => {
   console.log("por on 3000");
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // usamos las rutas
 app.use("/api", router);
 
-// analizamos solicitudes JSON
-app.use(express.json());
-
-// analizamos solicitudes con cuerpo codificado en URL
-app.use(express.urlencoded({ extended: true }));
+// creamos la conexion a la base de datos
+connection.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Conexión a la base de datos exitosa");
+  }
+});
