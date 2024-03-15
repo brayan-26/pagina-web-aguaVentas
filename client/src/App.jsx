@@ -4,16 +4,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RegisterPage from "../page/RegisterPage";
 import LoginPage from "../page/LoginPage";
 import ProductosPage from "../page/ProductosPage";
+import ProtectedRouters from "../context/ProtectedRouters";
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/*" element={<p>paila manito</p>} />
-          <Route path="/main" element={<ProductosPage />} />
+
+          <Route element={<ProtectedRouters />}>
+            <Route path="/main" element={<ProductosPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

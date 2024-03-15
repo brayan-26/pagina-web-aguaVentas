@@ -39,3 +39,13 @@ export function getProductosComerciales() {
     console.log(error);
   }
 }
+
+export function loginUser(datos) {
+  try {
+    const sql = "SELECT * FROM usuarios WHERE cedula = ? AND numero_nit = ?  ";
+    const results = connection.promise().execute(sql, datos);
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+}

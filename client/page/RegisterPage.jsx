@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , Link} from "react-router-dom";
 
 function RegisterPage() {
   const { register, handleSubmit } = useForm();
@@ -54,13 +54,14 @@ function RegisterPage() {
         <br />
         <input
           type="text"
-          placeholder="numero de nit"
+          placeholder="XXXXXXXXX-Y"
           {...register("numeroNit", { required: true })}
         />{" "}
         <br />
         <button type="submit">register usuario </button>
       </form>
       {mensaje && <p>{mensaje}</p>}
+      <Link to={"/"} >login</Link>
     </div>
   );
 }

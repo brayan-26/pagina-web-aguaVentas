@@ -1,6 +1,7 @@
 import {
   getProductosAguacate,
   getProductosComerciales,
+  loginUser,
   registerUser,
   validacionUser,
 } from "../models/user.models.js";
@@ -65,6 +66,33 @@ export const getProductos = async (req, res) => {
       dataAguacate: datosAguacate,
       dataComercial: datosComercial,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { cedula, numeroNit } = req.body;
+    var regex = /^[0-9]{9}-[0-9]$/;
+    const results = await loginUser([cedula, numeroNit]);
+
+    if (regex.test(numeroNit)) {
+      if (results[0].length > 0) {
+        res.status(200).json({
+          mensaje: "Usuario encontrado",
+        });
+      } else {
+        res.status(404).json({
+          mensaje: "Usuario No encontrado, revisa tus credenciales",
+        });
+      }
+    } else {
+      res.status(404).json({
+        mensaje:
+          "El formato del numero de nit es invalido, debe ser XXXXXXXXX-Y",
+      });
+    }
   } catch (error) {
     console.log(error);
   }
