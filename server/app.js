@@ -1,9 +1,16 @@
 import express from "express";
 import morgan from "morgan";
 import router from "./router/router.js";
+import cors from "cors";
 import { connection } from "./config/db.js";
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 // controlamos los get and post del api
 app.use(morgan("dev"));

@@ -24,15 +24,22 @@ export const register = async (req, res) => {
     const { nombreTienda, nombrePropietario, cedula, correo, numeroNit } =
       req.body;
     var regex = /^[0-9]{9}-[0-9]$/;
+    var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
     const datos = [nombreTienda, nombrePropietario, cedula, correo, numeroNit];
 
     if (nombreTienda && nombrePropietario && cedula && correo && numeroNit) {
       if (regex.test(numeroNit)) {
-        const results = await registerUser(datos);
-        if (results.length > 0) {
-          res.status(200).json({ mensaje: "Usuario Registrado" });
+        if (validEmail.test(correo)) {
+          const results = await registerUser(datos);
+          if (results.length > 0) {
+            res.status(200).json({ mensaje: "Usuario Registrado" });
+          } else {
+            res.status(404).json({ mensaje: "Error al Registar El Usuario" });
+          }
         } else {
-          res.status(404).json({ mensaje: "Error al Registar El Usuario" });
+          res.status(404).json({
+            mensaje: "Correo invalido, un ejemplo usuario@dominio.com",
+          });
         }
       } else {
         res.status(404).json({

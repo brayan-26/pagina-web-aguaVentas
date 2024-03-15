@@ -17,16 +17,21 @@ export const AuthProvider = ({ children }) => {
   const registerUser = async (values) => {
     try {
       const results = await register(values);
-      return results;
+      const resultsData = results.status
+      return {resultsData: resultsData}
     } catch (error) {
-      console.log(error);
+      if (error.response) {
+        const mensajeError = error.response.data.mensaje;
+        const errorSatus = error.response.status
+        return { mensajeError: mensajeError, errorSatus: errorSatus };
+      }
     }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        registerUser, 
+        registerUser,
         user,
       }}
     >
