@@ -5,6 +5,7 @@ import RegisterPage from "../page/RegisterPage";
 import LoginPage from "../page/LoginPage";
 import ProductosPage from "../page/ProductosPage";
 import ProtectedRouters from "../context/ProtectedRouters";
+import "../public/style/style.css"
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/*" element={<p>paila manito</p>} />
+            <Route path="/main" element={<ProductosPage />} />
 
           <Route element={<ProtectedRouters />}>
-            <Route path="/main" element={<ProductosPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
