@@ -5,7 +5,7 @@ function ProductsPage() {
   const { getProduct } = useAuth();
   const [aguacates, setAguacates] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
-  const [total, SetTotal] = useState(0);
+  const [total, setTotal] = useState(0);
   const [countProduct, setCountProduct] = useState(0);
   const [active, setActive] = useState(false);
 
@@ -17,11 +17,23 @@ function ProductsPage() {
           : item
       );
 
+      setCountProduct(countProduct + product.quantity);
+      setTotal(total + product.precio_aguacate * product.quantity);
       return setAllProducts([...products]);
     }
+    setTotal(total + product.precio_aguacate * product.quantity);
+    setCountProduct(countProduct + product.quantity);
     setAllProducts([...allProducts, product]);
   };
-  console.log(allProducts);
+
+  const onDelectProduct = (product) => {
+    const results = allProducts.filter(
+      (item) => item.id_agacates !== product.id_agacates
+    );
+    setTotal(total - product.precio_aguacate * product.quantity);
+    setCountProduct(countProduct - product.quantity);
+    setAllProducts(results);
+  };
 
   useEffect(() => {
     const obtenerProductos = async () => {
@@ -59,7 +71,6 @@ function ProductsPage() {
             Añadir al carrito
           </button>
         </div>
-        {/* <p>Tipo de aguacate: {producto.tipo_aguacate}</p> */}
       </div>
     );
   });
@@ -89,7 +100,7 @@ function ProductsPage() {
                 />
               </svg>
               <div className="count-products">
-                <span id="contador-productos">0</span>
+                <span id="contador-productos">{countProduct}</span>
               </div>
 
               <div
@@ -106,7 +117,9 @@ function ProductsPage() {
                           key={producto.id_agacates}
                         >
                           <div className="info-cart-product">
-                            <span className="cantidad-producto-carrito">1</span>
+                            <span className="cantidad-producto-carrito">
+                              {producto.quantity}
+                            </span>
                             <p className="titulo-producto-carrito">
                               {producto.nombre_aguacate}
                             </p>
@@ -121,6 +134,7 @@ function ProductsPage() {
                             strokeWidth="1.5"
                             stroke="currentColor"
                             className="icon-close"
+                            onClick={() => onDelectProduct(producto)}
                           >
                             <path
                               strokeLinecap="round"
@@ -134,8 +148,9 @@ function ProductsPage() {
 
                     <div className="cart-total">
                       <h3>Total:</h3>
-                      <span className="total-pagar">$200</span>
+                      <span className="total-pagar">${total}</span>
                     </div>
+                    <button className="btn-clear-all">Vaciar carrito</button>
                   </>
                 ) : (
                   <p className="cart-empty">El carrito está vacío</p>
