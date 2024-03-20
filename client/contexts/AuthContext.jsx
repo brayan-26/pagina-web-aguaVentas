@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export const useAuth = () => {
   const usecontext = useContext(AuthContext);
   if (!usecontext) {
-    console.log("no hya contexto");
+    console.log("no hay contexto");
   }
   return usecontext;
 };

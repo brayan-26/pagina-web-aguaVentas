@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 function ProductsPage() {
   const { getProduct } = useAuth();
@@ -48,7 +48,7 @@ function ProductsPage() {
     obtenerProductos();
   }, []);
 
-  const rutaImg = "../public/img/";
+  const rutaImg = "../assets/img/";
 
   // renderizamos los productos
   const renderProductos = aguacates.map((producto, index) => {

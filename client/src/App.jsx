@@ -1,11 +1,11 @@
 import React from "react";
-import { AuthProvider } from "../context/AuthContext";
+import { AuthProvider } from "../contexts/AuthContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import RegisterPage from "../page/RegisterPage";
-import LoginPage from "../page/LoginPage";
-import ProductosPage from "../page/ProductosPage";
-import ProtectedRouters from "../context/ProtectedRouters";
-import "../public/style/style.css"
+import RegisterPage from "../pages/RegisterPage";
+import LoginPage from "../pages/LoginPage";
+import ProductosPage from "../pages/ProductosPage";
+import ProtectedRouters from "../contexts/ProtectedRouters";
+import "../assets/style/style.css"
 
 function App() {
   return (
