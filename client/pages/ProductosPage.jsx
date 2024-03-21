@@ -21,6 +21,7 @@ function ProductsPage() {
       setTotal(total + product.precio_aguacate * product.quantity);
       return setAllProducts([...products]);
     }
+    // setTotal(total + total);
     setTotal(total + product.precio_aguacate * product.quantity);
     setCountProduct(countProduct + product.quantity);
     setAllProducts([...allProducts, product]);
